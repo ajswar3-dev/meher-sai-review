@@ -1,1 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meher Sai Optics – Share your review</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f3f6f7;--card:#fff;--tx:#12263a;--mu:#52646f;--ac:#0f7b8a;--on:#fff;--bd:#cfdadd;--chip:#e6f1f3;--st:#f2a33a;--off:#c9d3d6}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0e1a22;--card:#16252f;--tx:#eaf1f4;--mu:#9bb0ba;--ac:#4cc0d1;--on:#06222a;--bd:#2a3e4a;--chip:#1d3340;--st:#f5b84a;--off:#3a4e5a}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0e1a22;--card:#16252f;--tx:#eaf1f4;--mu:#9bb0ba;--ac:#4cc0d1;--on:#06222a;--bd:#2a3e4a;--chip:#1d3340;--st:#f5b84a;--off:#3a4e5a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans Devanagari",Roboto,sans-serif;line-height:1.5;font-size:16px}
+[hidden]{display:none!important}
+main{max-width:520px;margin:0 auto;padding:20px 16px 40px}
+header{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+header svg{flex:none}
+h1{font-size:1.35rem;margin:0;line-height:1.2}
+.sub{color:var(--mu);margin:2px 0 0;font-size:.95rem}
+.langs{display:flex;gap:6px;margin:14px 0}
+.langs button{flex:1;padding:8px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;font:inherit;cursor:pointer}
+.langs button[aria-pressed="true"]{background:var(--ac);color:var(--on);border-color:var(--ac);font-weight:600}
+section{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;margin-bottom:14px}
+h2{font-size:1.05rem;margin:0 0 10px}
+.stars{display:flex;gap:6px}
+.stars button{flex:1;font-size:2rem;line-height:1;padding:8px 0;border:0;background:none;color:var(--off);cursor:pointer;border-radius:10px}
+.stars button.on{color:var(--st)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{padding:9px 13px;border:1px solid var(--bd);background:var(--chip);color:var(--tx);border-radius:999px;font:inherit;font-size:.93rem;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ac);color:var(--on);border-color:var(--ac);font-weight:600}
+textarea{width:100%;min-height:96px;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit;resize:vertical}
+.btn{display:block;width:100%;text-align:center;padding:14px;border:0;border-radius:12px;background:var(--ac);color:var(--on);font:inherit;font-weight:700;cursor:pointer;text-decoration:none;margin-top:10px}
+.btn.alt{background:var(--chip);color:var(--tx);border:1px solid var(--bd);font-weight:600}
+.btn:disabled{opacity:.6}
+button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.note{color:var(--mu);font-size:.85rem;margin:10px 0 0}
+.msg{color:var(--ac);font-weight:600;margin:8px 0 0}
+</style>
+</head>
+<body>
+<main>
+<header>
+<svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><circle cx="15" cy="26" r="11" fill="none" stroke="#0f7b8a" stroke-width="3"/><circle cx="33" cy="26" r="11" fill="none" stroke="#f2a33a" stroke-width="3"/><path d="M26 24q-2-2-4 0" fill="none" stroke="#0f7b8a" stroke-width="3"/></svg>
+<div><h1>Meher Sai Optics</h1><p class="sub" data-k="sub"></p></div>
+</header>
+<div class="langs" role="group" aria-label="Language">
+<button data-l="en">English</button><button data-l="hi">हिन्दी</button><button data-l="mr">मराठी</button>
+</div>
+<section><h2 data-k="q1"></h2><div class="stars" id="stars"></div></section>
+<section><h2 data-k="q2"></h2><div class="chips" id="chips"></div>
+<h2 style="margin-top:16px" data-k="q3"></h2><textarea id="own" maxlength="300"></textarea></section>
+<button class="btn" id="make" data-k="make"></button>
+<p class="msg" id="err" hidden></p>
+<section id="out" hidden style="margin-top:14px"><h2 data-k="draft"></h2>
+<textarea id="draft" maxlength="1000"></textarea>
+<button class="btn alt" id="ai" hidden data-k="ai"></button>
+<a class="btn" id="go" href="https://search.google.com/local/writereview?placeid=ChIJyelnyIWi2zsRrgWi6Qdj33Y" target="_blank" rel="noopener" data-k="go"></a>
+<p class="msg" id="ok" hidden></p>
+<p class="note" data-k="note"></p></section>
+</main>
+<script>
+var T={
+en:{sub:"Tell us how we did. It takes a minute.",q1:"How was your visit?",q2:"What did you like?",q3:"Anything to add in your own words? (optional)",make:"Write my review draft",draft:"Your review (edit it as you like)",ai:"Rewrite with AI",go:"Copy and open Google",ok:"Copied. Paste it on Google and tap Post.",note:"You post the review yourself on Google. Please keep it honest and only mention what you experienced.",pick:"Please tap a star rating first.",oh:"I had a great experience at Meher Sai Optics.",ol:"I visited Meher Sai Opt
 
